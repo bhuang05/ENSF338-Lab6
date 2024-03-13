@@ -5,7 +5,7 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
+#Below functions made with help from ChatGPT
 def infix_to_postfix(expression):
     precedence = {'+': 1, '-': 1, '*': 2, '/': 2}
     postfix = []
