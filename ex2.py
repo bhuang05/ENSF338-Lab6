@@ -63,10 +63,9 @@ def binary_search(arr, target):
         else:
             high = mid - 1
 
-vector = np.arange(1, 10001)
+vector = np.arange(1, 100000)
 shuffled_vector = vector.copy()
 np.random.shuffle(shuffled_vector)
-
 
 binary_search_time = 0
 binary_search_avg_times = []
@@ -74,12 +73,13 @@ binary_search_avg_times = []
 for element in vector:
     binary_search_avg_time = 0
     for _ in range(10):
-        total_time = timeit.timeit(lambda: binary_search(vector, element), number = 1)
+        total_time = timeit.timeit(lambda: binary_search(vector, element), number=1)
         binary_search_avg_time += total_time
         binary_search_time += total_time
     binary_search_avg_times.append(binary_search_avg_time / 10)
 
 binary_search_avg_time = sum(binary_search_avg_times) / len(vector)
+
 
 
 bst_shuffled = BinarySearchTree()
@@ -100,9 +100,20 @@ for i in shuffled_vector:
 
 shuffled_avg_time = sum(shuffled_avg_times) / len(shuffled_vector)
 
-print(f"Total time for binary search: {binary_search_time} seconds")
-print(f"Average time per instruction: {binary_search_time} seconds")
 
 print(f"Total time for shuffled binary tree search: {shuffled_search_time} seconds")
 print(f"Average time per instruction: {shuffled_avg_time} seconds")
+
+print(f"Total time for binary search: {binary_search_time} seconds")
+print(f"Average time per instruction: {binary_search_avg_time} seconds")
+
+"""
+Question 4:
+Although both binary search in a sorted array and searching in a binary search tree that is balanced (assumed since we inserted a 
+vector of shuffled elements) is both O(log(n)), the binary search tree is faster than the binary search in a sorted array. This could
+be attributed to multiple factors like how the binary search tree is balanced from the shuffled insertion of elements, or how there is 
+an extra step in implementation for binary search (when it has to calculate the midpoint, low and high). Another reason could be that
+since the binary search tree uses nodes which are scattered in memory unlike the array which is contiguous, the binary search tree
+could be faster due to cache locality.
+"""
 
